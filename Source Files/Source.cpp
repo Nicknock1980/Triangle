@@ -6,7 +6,6 @@ void InitialSetup();
 void Update() {};
 void Render();
 
-
 // Create an GLFW controlled context window
 GLFWwindow* Window = nullptr;
 
