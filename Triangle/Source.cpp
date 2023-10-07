@@ -1,27 +1,12 @@
 #include <glew.h>
 #include <glfw3.h>
 #include <iostream>
+#include "ShaderLoader.h"
 
 void Setup();
 void Update();
 void Render();
 void CleanUp();
-
-// Vertex Shader source code
-const char* vertexShaderSource = "#version 460 core\n"
-"void main()\n"
-"{\n"
-"   const vec3 Vertices[] = vec3[]( vec3(0.0f, 0.8f, 0.0f), vec3(-0.5f, 0.0f, 0.0f), vec3(0.5f, 0.0f, 0.0f));\n"
-"   gl_Position = vec4(Vertices[gl_VertexID], 1.0f);\n"
-"}\0";
-
-//Fragment Shader source code
-const char* fragmentShaderSource = "#version 460 core\n"
-"out vec4 FinalColor;\n"
-"void main()\n"
-"{\n"
-"   FinalColor = vec4(1.0f, 1.0f, 1.0f, 1.0f);\n"
-"}\n\0";
 
 // Create an GLFW controlled context window
 GLFWwindow* Window = nullptr;
@@ -31,6 +16,14 @@ GLuint shaderProgram;
 
 // Create reference containers for the Vartex Array Object and the Vertex Buffer Object
 GLuint VAO, VBO;
+
+// Vertices coordinates
+GLfloat vertices[] =
+{
+	-0.5f, -0.5f * float(sqrt(3)) / 3, 0.0f, // Lower left corner
+	0.5f, -0.5f * float(sqrt(3)) / 3, 0.0f, // Lower right corner
+	0.0f, 0.5f * float(sqrt(3)) * 2 / 3, 0.0f // Upper corner
+};
 
 int main()
 {
@@ -87,45 +80,7 @@ void Setup()
 	// Maps the range of window size to ndc (-1 -> to 1)
 	glViewport(0, 0, 800, 800);
 
-	// Create Vertex Shader Object and get its reference
-	GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
-
-	// Attach Vertex Shader source to the Vertex Shader Object
-	glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
-
-	// Compile the Vertex Shader into machine code
-	glCompileShader(vertexShader);
-
-	// Create Fragment Shader Object and get its reference
-	GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-
-	// Attach Fragment Shader source to the Fragment Shader Object
-	glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
-
-	// Compile the Vertex Shader into machine code
-	glCompileShader(fragmentShader);
-
-	// Create Shader Program Object and get its reference
-	shaderProgram = glCreateProgram();
-
-	// Attach the Vertex and Fragment Shaders to the Shader Program
-	glAttachShader(shaderProgram, vertexShader);
-	glAttachShader(shaderProgram, fragmentShader);
-
-	// Wrap-up/Link all the shaders together into the Shader Program
-	glLinkProgram(shaderProgram);
-
-	// Delete the now useless Vertex and Fragment Shader objects
-	glDeleteShader(vertexShader);
-	glDeleteShader(fragmentShader);
-
-	// Vertices coordinates
-	GLfloat vertices[] =
-	{
-		-0.5f, -0.5f * float(sqrt(3)) / 3, 0.0f, // Lower left corner
-		0.5f, -0.5f * float(sqrt(3)) / 3, 0.0f, // Lower right corner
-		0.0f, 0.5f * float(sqrt(3)) * 2 / 3, 0.0f // Upper corner
-	};
+	GLuint shaderProgram = ShaderLoader::CreateProgram("Resources/Shaders/FixedTriangle.vs", "Resources/Shaders/FixedColor.fs");
 
 	// Generate the VAO and VBO with only 1 object each
 	glGenVertexArrays(1, &VAO);

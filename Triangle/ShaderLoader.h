@@ -14,7 +14,8 @@ public:
 private:
 	ShaderLoader(void);
 	~ShaderLoader(void);
+
+	static std::string ReadShaderFile(const char* filename);
 	static GLuint CreateShader(GLenum shaderType, const char* shaderName);
-	static std::string ReadShaderFile(const char *filename);
 	static void PrintErrorDetails(bool isShader, GLuint id, const char* name);
 };
