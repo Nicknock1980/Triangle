@@ -14,20 +14,28 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
     <Filter Include="Resource Files\Shaders">
-      <UniqueIdentifier>{d8c4a0ee-83a6-458f-b958-060b135fa8f3}</UniqueIdentifier>
+      <UniqueIdentifier>{2dc6be2b-873e-4d55-aefb-7e0cf9d3e954}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source Files\Source.cpp">
+    <None Include="FixedColor.fs">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
+    <None Include="FixedTriangle.vs">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderLoader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Shaders\FixedColor.fs">
-      <Filter>Resource Files\Shaders</Filter>
-    </None>
-    <None Include="Resources\Shaders\FixedTriangle.vs">
-      <Filter>Resource Files\Shaders</Filter>
-    </None>
+    <ClInclude Include="ShaderLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -3,7 +3,7 @@
 #include <iostream>
 
 void InitialSetup();
-void Update() {};
+void Update();
 void Render();
 
 // Create an GLFW controlled context window
@@ -61,3 +61,8 @@ void Render()
 	glfwSwapBuffers(Window);
 }
 
+// Update all objects and run the processes
+void Update()
+{
+	glfwPollEvents();
+}
