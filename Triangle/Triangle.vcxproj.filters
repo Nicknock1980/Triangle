@@ -24,6 +24,15 @@
     <ClCompile Include="ShaderLoader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="VAO.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VBO.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\FixedColor.fs">
@@ -35,6 +44,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ShaderLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VAO.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VBO.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
