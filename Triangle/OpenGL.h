@@ -1,19 +1,21 @@
 #pragma once
 #include <glew.h>
 #include <glfw3.h>
+#include "OpenGL.h"
 
 class OpenGL
 {
 public:
 	OpenGL();
 
+private:	
+	void Setup();
 	void Update();
 	void Render();
 	void CleanUp();
 
-private:	
 	// Create an GLFW controlled context window
-	class GLFWwindow* Window;
+	GLFWwindow* Window;
 
 	// Shader Program Reference
 	GLuint shaderProgram;

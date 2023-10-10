@@ -13,6 +13,26 @@ OpenGL::OpenGL()
 	VAOID = 0;
 	VBOID = 0;
 
+	// Setup the initial elements of the program
+	Setup();
+
+	// Main loop
+	while (glfwWindowShouldClose(Window) == false)
+	{
+		// Updates all objects and run the processes
+		Update();
+
+		// Render all the objects
+		Render();
+	}
+
+	// Cleaning up objects and windows
+	CleanUp();
+
+}
+
+void OpenGL::Setup()
+{
 	// Vertices coordinates
 	GLfloat vertices[] =
 	{
@@ -68,20 +88,45 @@ OpenGL::OpenGL()
 	// Bind both the VBO and VAO to 0 so that we don't accidentally modify the VAO and VBO we created
 	vao.Unbind();
 	vbo.Unbind();
-
 }
 
 void OpenGL::Update()
 {
-
+	// Take care of all GLFW events
+	glfwPollEvents();
 }
 
 void OpenGL::Render()
 {
+	// Specify the color of the background
+	glClearColor(0.07f, 0.13f, 0.17f, 1.0f);
 
+	// Clean the back buffer and assign the new color to it
+	glClear(GL_COLOR_BUFFER_BIT);
+
+	// Tell OpenGL which Shader Program we want to use
+	glUseProgram(shaderProgram);
+
+	// Bind the VAO so OpenGL knows to use it
+	glBindVertexArray(VAOID);
+
+	// Draw the triangle using the GL_TRIANGLES primitive
+	glDrawArrays(GL_TRIANGLES, 0, 3);
+
+	// Swap the back buffer with the front buffer
+	glfwSwapBuffers(Window);
 }
 
 void OpenGL::CleanUp()
 {
+	// Delete all the objects we've created
+	glDeleteVertexArrays(1, &VAOID);
+	glDeleteBuffers(1, &VBOID);
+	glDeleteProgram(shaderProgram);
 
+	// Delete window before ending the program
+	glfwDestroyWindow(Window);
+
+	// Terminate GLFW before ending the program
+	glfwTerminate();
 }
